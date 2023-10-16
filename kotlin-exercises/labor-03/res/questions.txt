@@ -1,0 +1,60 @@
+1. What is the entry point of a Kotlin program?
+   1) main()
+   2) start()
+   3) begin()
+   4) init()
+  1
+2. Which keyword is used to declare a variable in Kotlin?
+   1) let
+   2) var
+   3) def
+   4) const
+   2
+3. What is the Kotlin equivalent of Java's "NullPointerException"?
+   1) KotlinException
+   2) NullReferenceException
+   3) NullPointerException
+   4) ObjectNullException
+   2
+4. In Kotlin, what is the keyword for creating a class?
+   1) Class
+   2) New
+   3) Object
+   4) Fun
+   3
+5. Which one is used to create a Singleton class in Kotlin?
+   1) final
+   2) object
+   3) static
+   4) singleton
+   2
+6. What is the default visibility modifier in Kotlin?
+   1) internal
+   2) public
+   3) private
+   4) protected
+   2
+7. In Kotlin, what does the keyword 'lateinit' represent?
+   1) An abstract class
+   2) A lazy initialization property
+   3) A variable that is initialized later
+   4) A method to delay execution
+   2
+8. What is the equivalent of a switch statement in Kotlin?
+   1) switch case
+   2) case switch
+   3) when
+   4) choose
+   3
+9. Which of the following is a Kotlin feature that helps prevent NullPointerException?
+   1) NonNull
+   2) Safe Calls (?.)
+   3) NoNull
+   4) Nullable
+   2
+10. Which of the following is NOT a basic data type in Kotlin?
+    1) Float
+    2) Char
+    3) String
+    4) Array
+   4
