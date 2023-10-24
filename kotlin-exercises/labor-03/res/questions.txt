@@ -48,7 +48,7 @@
    3
 9. Which of the following is a Kotlin feature that helps prevent NullPointerException?
    1) NonNull
-   2) Safe Calls (?.)
+   2) Safe Calls
    3) NoNull
    4) Nullable
    2
