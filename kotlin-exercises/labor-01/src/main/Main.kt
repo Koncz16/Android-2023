@@ -1,5 +1,6 @@
-import java.util.Base64
-import kotlin.contracts.contract
+import org.testng.TestNG
+import test.AnagramsGrouperTest
+import java.util.*
 import kotlin.random.Random
 
 fun main(args: Array<String>) {
@@ -42,7 +43,30 @@ fun main(args: Array<String>) {
     mutableLists()
     //8
      arrays()
+
+    // Extra: Anagrams
+    val testng = TestNG()
+    val suites = mutableListOf<Class<*>>()
+    suites.add(AnagramsGrouperTest::class.java)
+    testng.setTestClasses(suites.toTypedArray())
+    testng.run()
 }
+
+fun groupAnagrams(strs: Array<String>): List<List<String>> {
+    val map = mutableMapOf<String, MutableList<String>>()
+
+    for ( str in strs) {
+        val lwr=str.lowercase()
+        val key = lwr.toCharArray().sorted().joinToString("")
+        if (map.containsKey(key)) {
+            map[key]?.add(lwr)
+        } else {
+            map[key] = mutableListOf(lwr)
+        }
+    }
+    return map.values.toList()
+}
+
 
 fun sum() {
     val num1 = 2
@@ -148,8 +172,5 @@ fun arrays(){
 
     val avg=array.sum()/array.size
     println(avg)
-
-
-
 
 }
