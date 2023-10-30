@@ -3,8 +3,12 @@ package main
 import kotlin.random.Random
 
 fun main() {
-    val problem:Int?
-    problem= readLine()?.toInt()
+    var problem:Int?=null
+    try {
+        problem = readLine()?.toInt()
+    } catch (e: NumberFormatException) {
+        println("Error: The provided value could not be converted to an integer.")
+    }
 
     when(problem) {
         1->{
@@ -32,9 +36,9 @@ fun main() {
             val fruits2 = listOf("apple", "pear","strawberry", "melon")
             println(fruits2.returnLongest());
         }
-        3->{
+        3-> {
             val validDates = mutableListOf<Date>()
-            while (validDates.size<10) {
+            while (validDates.size < 10) {
                 val year = Random.nextInt(1900, 2100)
                 val month = Random.nextInt(1, 13)
                 val day = Random.nextInt(1, 32)
@@ -48,20 +52,20 @@ fun main() {
                 }
             }
             println("Print the valid dates list: ")
-            validDates.forEach{x-> println(x) }
+            validDates.forEach { x -> println(x) }
             println("Sorted list: ")
-            var sortedDates=validDates.sorted()
-            sortedDates.forEach{x-> println(x) }
+            var sortedDates = validDates.sorted()
+            sortedDates.forEach { x -> println(x) }
 
             println("\nReverse sorted list: ")
-            sortedDates.reversed().forEach{x-> println(x) }
+            sortedDates.reversed().forEach { x -> println(x) }
 
-            val sortBy=SortOrder.MONTH
+            val sortBy = SortOrder.MONTH
             val customComparator = getComparator(sortBy)
 
             println("\nCustom sorted by $sortBy :")
-            val customSorted=validDates.sortedWith(customComparator)
-            customSorted.forEach{x->println(x)}
+            val customSorted = validDates.sortedWith(customComparator)
+            customSorted.forEach { x -> println(x) }
         }
     }
 }
