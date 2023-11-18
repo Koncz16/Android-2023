@@ -3,5 +3,12 @@
     <string name="start_button">Start</string>
     <string name="edit_text_hint">Enter your input here</string>
     <string name="RH_load">Loading Recipe Hub!</string>
-    <string name="RH_welcome">Welcome to Recipe Hub!</string>
+    <string name="RH_welcome">Welcome</string>
+    <string name="RH_welcome_t_rh">to the RecipeHub</string>
+    <string name="RH_DB_text">Where you can find the best recipes and tips to enjoy a culinary experience</string>
+    <string name="RH_DB_button">Get started</string>
+    <string name="home">Home</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

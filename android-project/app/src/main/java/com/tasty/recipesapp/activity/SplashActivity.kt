@@ -1,35 +1,32 @@
-package com.tasty.recipesapp
+package com.tasty.recipesapp.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import com.tasty.recipesapp.R
 
 
 class SplashActivity : AppCompatActivity() {
 
     companion object{
-        private  val TAG:String? =SplashActivity::class.java.canonicalName
+        private  val TAG:String? = SplashActivity::class.java.canonicalName
     }
+
+    private val SPLASH_DELAY: Long = 2000 // 2 seconds delay
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        val editTextUserInput = findViewById<EditText>(R.id.editTextUserInput)
-        val buttonStart = findViewById<Button>(R.id.startButton)
-        Log.d(TAG, "SplashActivity - onCreate() called")
 
-        buttonStart.setOnClickListener {
-            val inputText = editTextUserInput.text.toString()
-
+        Handler().postDelayed({
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("message", inputText)
             startActivity(intent)
-            Log.d(TAG, "SplashActivity - startButton() clicked")
-        }
+            finish()
+        }, SPLASH_DELAY)
     }
 
     override fun onStart() {
