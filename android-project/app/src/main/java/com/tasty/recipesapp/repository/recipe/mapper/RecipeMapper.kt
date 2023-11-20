@@ -6,6 +6,7 @@ import com.tasty.recipesapp.repository.recipe.mapper.InstructionMapper.Companion
 import com.tasty.recipesapp.repository.recipe.mapper.PriceMapper.Companion.toModel
 import com.tasty.recipesapp.repository.recipe.mapper.RecipeMapper.Companion.toModel
 import com.tasty.recipesapp.repository.recipe.mapper.SectionMapper.Companion.toModel
+import com.tasty.recipesapp.repository.recipe.mapper.SectionMapper.Companion.toModelList
 import com.tasty.recipesapp.repository.recipe.mapper.TagMapper.Companion.toModelList
 import com.tasty.recipesapp.repository.recipe.mapper.UserRatingsMapper.Companion.toModel
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
@@ -19,8 +20,6 @@ class RecipeMapper {
                 instructions=this.instructions.toModelList(),
                 tags = this.tags.toModelList(),
                 price = this.price.toModel(),
-                section = this.section.toModel()
-
             )
         }
         fun List<RecipeDTO>.toModelList(): List<RecipeModel> = this.map { it.toModel() }

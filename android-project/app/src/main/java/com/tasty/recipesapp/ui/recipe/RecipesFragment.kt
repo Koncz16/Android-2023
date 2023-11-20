@@ -45,8 +45,6 @@ class RecipesFragment : Fragment() {
                     Log.d(ContentValues.TAG,"Tag: ${tag.displayName} : ${tag.type}")
                 }
                 Log.d(ContentValues.TAG,"Price: ${it.price.total}")
-
-
             }
         }
         viewModel.readAllRecipes(this)

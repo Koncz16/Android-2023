@@ -7,6 +7,5 @@ data class RecipeDTO(
     val description:String,
     val instructions: List<InstructionDTO>,
     val tags:List<TagDTO>,
-    val price: PriceDTO,
-    val section:SectionDTO
+    val price: PriceDTO
 )

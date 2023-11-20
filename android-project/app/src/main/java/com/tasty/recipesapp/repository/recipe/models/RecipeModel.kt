@@ -11,8 +11,5 @@ class RecipeModel (
     val description: String,
     val instructions: List<InstructionModel>,
     val tags:List<TagModel>,
-    val price: PriceModel,
-    val section: SectionModel
-
-
+    val price: PriceModel
 )
