@@ -39,6 +39,7 @@ android {
 
 dependencies {
     val nav_version = "2.7.5"
+    implementation ("com.google.code.gson:gson:2.8.7")
 
     implementation("com.google.android.material:material:1.11.0-alpha01")
 

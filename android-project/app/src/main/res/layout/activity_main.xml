@@ -8,6 +8,19 @@
         tools:context=".activity.MainActivity">
 
 
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="420dp"
+        android:layout_height="71dp"
+        android:background="#90EE90"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+    </FrameLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
