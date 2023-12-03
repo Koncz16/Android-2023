@@ -1,0 +1,64 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="409dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Felső rész - Kép -->
+        <ImageView
+            android:id="@+id/recipe_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="142dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@mipmap/ic_launcher"/>
+
+        <!-- Alsó rész - Fehér háttér -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recipe_image_view"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Cím -->
+            <TextView
+                android:id="@+id/recipe_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+
+            <!-- Leírás -->
+            <TextView
+                android:id="@+id/recipe_description_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textSize="18sp"/>
+
+            <!-- Ratings -->
+            <TextView
+                android:id="@+id/recipe_ratings_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Ratings"
+                android:textSize="18sp"/>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

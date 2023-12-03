@@ -8,9 +8,9 @@ class UserRatingsMapper {
     companion object{
         fun UserRatingsDTO.toModel():UserRatingsModel{
             return UserRatingsModel(
-                countPositive=this.countPositive,
-             score=this.score,
-             countNegative=this.countNegative)
+                countPositive=this.count_positive,
+                score=this.score,
+                countNegative=this.count_negative)
         }
     }
 }

@@ -20,6 +20,9 @@ class RecipeMapper {
                 instructions=this.instructions.toModelList(),
                 tags = this.tags.toModelList(),
                 price = this.price.toModel(),
+                thumbnail_url=this.thumbnail_url,
+                ratings=this.user_ratings.toModel(),
+                video_url=this.video_url
             )
         }
         fun List<RecipeDTO>.toModelList(): List<RecipeModel> = this.map { it.toModel() }

@@ -8,47 +8,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
 import com.tasty.recipesapp.ui.home.DashboardFragment
+import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.viewModel.recipe.RecipeListViewModel
 
 class RecipesFragment : Fragment() {
-    companion object{
-        val TAG:String? = RecipesFragment::class.java.canonicalName
+    companion object {
+        val TAG: String? = RecipesFragment::class.java.canonicalName
     }
+
+    private var _binding: FragmentRecipesBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d(TAG,"RecipesFragment - onCreateView() called")
-
-        val view = FragmentRecipesBinding.inflate(layoutInflater)
-        val recipes: Array<RecipeModel> = emptyArray()
+        _binding = FragmentRecipesBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         val viewModel: RecipeListViewModel by viewModels()
-        val liveData = viewModel.liveData
-        
-        liveData.observe(viewLifecycleOwner) { it ->
-            it.forEach{
-                Log.d(ContentValues.TAG,"Name: ${it.name}")
-                Log.d(ContentValues.TAG,"Description: ${it.description}")
+        viewModel.readAllRecipes(this)
 
-                val instructions = it.instructions
-                instructions.forEachIndexed { index, instruction ->
-                    Log.d(ContentValues.TAG, "Instruction $index: ${instruction.display_text}")
-                }
-                val tags=it.tags
-                tags.forEach{tag->
-                    Log.d(ContentValues.TAG,"Tag: ${tag.displayName} : ${tag.type}")
-                }
-                Log.d(ContentValues.TAG,"Price: ${it.price.total}")
+        val adapter = viewModel.liveData.value?.let { recipes ->
+            context?.let { context ->
+                RecipeListAdapter(recipes, context)
             }
         }
-        viewModel.readAllRecipes(this)
+
+        // RecyclerView beállítása
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.addItemDecoration(
+            DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        )
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipes, container, false)
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

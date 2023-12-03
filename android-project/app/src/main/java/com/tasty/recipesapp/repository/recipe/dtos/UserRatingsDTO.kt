@@ -1,7 +1,7 @@
 package com.tasty.recipesapp.repository.recipe.dtos
 
 data class UserRatingsDTO(
-    var countPositive: Int,
-    var score: Double,
-    var countNegative: Int
+    var count_positive: Int?,
+    var score: Double?,
+    var count_negative: Int?
 )
