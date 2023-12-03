@@ -15,11 +15,16 @@ class RecipeMapper {
     companion object {
         fun RecipeDTO.toModel(): RecipeModel {
             return RecipeModel(
+                id=this.id,
                 name = this.name,
                 description=this.description,
                 instructions=this.instructions.toModelList(),
                 tags = this.tags.toModelList(),
-                price = this.price.toModel(),
+                price = this.price?.toModel(),
+                thumbnail_url=this.thumbnail_url,
+                original_video_url=this.original_video_url,
+                user_ratings= this.user_ratings?.toModel(),
+                compilations=this.compilations.toModelList()
             )
         }
         fun List<RecipeDTO>.toModelList(): List<RecipeModel> = this.map { it.toModel() }
