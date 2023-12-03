@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2023-10-25T00:07:23 EEST" name="Command line suite" finished-at="2023-10-25T00:07:23 EEST" duration-ms="40">
+    <groups>
+    </groups>
+    <test started-at="2023-10-25T00:07:23 EEST" name="Command line test" finished-at="2023-10-25T00:07:23 EEST" duration-ms="40">
+      <class name="test.AnagramsGrouperTest">
+        <test-method signature="noGroup()[pri:0, instance:test.AnagramsGrouperTest@17579e0f]" started-at="2023-10-25T00:07:23 EEST" name="noGroup" finished-at="2023-10-25T00:07:23 EEST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- noGroup -->
+        <test-method signature="threeGroupsAllLowerCase()[pri:0, instance:test.AnagramsGrouperTest@17579e0f]" started-at="2023-10-25T00:07:23 EEST" name="threeGroupsAllLowerCase" finished-at="2023-10-25T00:07:23 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- threeGroupsAllLowerCase -->
+        <test-method signature="threeGroupsSomeUpperCase()[pri:0, instance:test.AnagramsGrouperTest@17579e0f]" started-at="2023-10-25T00:07:23 EEST" name="threeGroupsSomeUpperCase" finished-at="2023-10-25T00:07:23 EEST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- threeGroupsSomeUpperCase -->
+        <test-method signature="validOneGroup()[pri:0, instance:test.AnagramsGrouperTest@17579e0f]" started-at="2023-10-25T00:07:23 EEST" name="validOneGroup" finished-at="2023-10-25T00:07:23 EEST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validOneGroup -->
+      </class> <!-- test.AnagramsGrouperTest -->
+    </test> <!-- Command line test -->
+  </suite> <!-- Command line suite -->
+</testng-results>
