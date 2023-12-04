@@ -27,7 +27,12 @@
         tools:layout="@layout/fragment_recipes" >
         <action
             android:id="@+id/action_recipesFragment_to_recipeDetailFragment"
-            app:destination="@id/recipeDetailFragment" />
+            app:destination="@id/recipeDetailFragment">
+            <argument
+                android:name="recipeID"
+                app:argType="integer"
+                android:defaultValue="@null"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

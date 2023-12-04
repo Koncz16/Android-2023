@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.R
@@ -34,15 +37,14 @@ class RecipesFragment : Fragment() {
         val view = binding.root
 
         val viewModel: RecipeListViewModel by viewModels()
-        viewModel.readAllRecipes(this)
+        context?.let { viewModel.readAllRecipes(it) }
 
         val adapter = viewModel.liveData.value?.let { recipes ->
             context?.let { context ->
-                RecipeListAdapter(recipes, context)
+                RecipeListAdapter(recipes, this, context)
             }
         }
 
-        // RecyclerView beállítása
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.addItemDecoration(
@@ -51,6 +53,17 @@ class RecipesFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    fun navigateToRecipeDetail(recipe:RecipeModel){
+        Log.d(TAG,"navigateToRecipeDetail - Called()")
+        val bundle = Bundle()
+        bundle.putInt("recipeID", recipe.id)
+
+        findNavController().navigate(
+            R.id.action_recipesFragment_to_recipeDetailFragment,
+            bundle
+        )
     }
 
     override fun onDestroyView() {

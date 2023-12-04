@@ -3,6 +3,7 @@ package com.tasty.recipesapp.repository.recipe.dtos
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
 
 data class RecipeDTO(
+    val id: Int,
     val name: String,
     val description:String,
     val instructions: List<InstructionDTO>,
@@ -10,5 +11,6 @@ data class RecipeDTO(
     val price: PriceDTO,
     val thumbnail_url : String,
     val user_ratings : UserRatingsDTO,
-    val video_url : String?
+    val video_url : String?,
+    val total_time_tier:TotalTimeTierDTO
 )

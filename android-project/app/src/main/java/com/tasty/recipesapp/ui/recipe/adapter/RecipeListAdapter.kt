@@ -1,6 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
+import com.tasty.recipesapp.ui.recipe.RecipesFragment
 
-class RecipeListAdapter(private val recipes:Array<RecipeModel>, private val context:Context) :
+class RecipeListAdapter(private val recipes:Array<RecipeModel>,
+                        private val recipesFragment: RecipesFragment,
+                        private val context:Context) :
     RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
-
+    companion object {
+        val TAG: String? = RecipeListAdapter::class.java.canonicalName
+    }
    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val itemTitle:TextView=itemView.findViewById(R.id.recipe_title_view)
         val itemDescription:TextView=itemView.findViewById(R.id.recipe_description_view)
@@ -25,7 +31,8 @@ class RecipeListAdapter(private val recipes:Array<RecipeModel>, private val cont
            itemView.setOnClickListener{it :View ->
                val position:Int = this.adapterPosition
                val currentRecipe=recipes[position]
-
+                    Log.d(TAG,"ItemView Clicked on id: ${currentRecipe.name}. ${currentRecipe.id}")
+               recipesFragment.navigateToRecipeDetail(currentRecipe)
                //onItemCickListener(currentRecipe)
            }
        }

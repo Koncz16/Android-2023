@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.viewModel.recipe
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 class RecipeListViewModel: ViewModel() {
     val liveData = MutableLiveData<Array<RecipeModel>>()
 
-    fun readAllRecipes(context: RecipesFragment){
+    fun readAllRecipes(context: Context){
         viewModelScope.launch {
             val list = RecipeRepository(context).readRecipes()
             val models = list.toModelList()
