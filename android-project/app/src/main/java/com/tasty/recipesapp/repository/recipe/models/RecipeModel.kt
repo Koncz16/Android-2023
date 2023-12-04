@@ -17,6 +17,8 @@ class RecipeModel (
     val thumbnail_url : String,
     val ratings : UserRatingsModel?,
     val video_url : String?,
-    val total_time_tier: TotalTimeTierModel
+    val total_time_tier: TotalTimeTierModel,
+    val original_video_url : String?
+
 
 )

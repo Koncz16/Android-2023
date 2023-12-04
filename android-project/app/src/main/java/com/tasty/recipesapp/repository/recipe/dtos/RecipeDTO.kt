@@ -12,5 +12,6 @@ data class RecipeDTO(
     val thumbnail_url : String,
     val user_ratings : UserRatingsDTO,
     val video_url : String?,
-    val total_time_tier:TotalTimeTierDTO
+    val total_time_tier:TotalTimeTierDTO,
+    val original_video_url : String?
 )

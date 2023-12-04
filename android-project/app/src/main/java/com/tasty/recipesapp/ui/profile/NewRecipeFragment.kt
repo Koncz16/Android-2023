@@ -21,10 +21,12 @@ class NewRecipeFragment : Fragment() {
     companion object {
         val TAG: String? = NewRecipeFragment::class.java.canonicalName
     }
+
     private lateinit var editTextName: EditText
+
     //private lateinit var layoutIngredients: LinearLayout
     //private lateinit var layoutInstructions: LinearLayout
-    private lateinit var editTextDescription:EditText
+    private lateinit var editTextDescription: EditText
     private lateinit var buttonSave: Button
     private lateinit var profileViewModel: ProfileViewModel
 
@@ -64,17 +66,22 @@ class NewRecipeFragment : Fragment() {
             val recipeEntity = RecipeEntity(
                 name = recipeName,
                 description = recipeDescription,
-                // További adatokat hozzáadhatod, például ingredients, instructions, stb.
+                //Add more parameters
             )
-
-            profileViewModel.insertRecipe(recipeEntity)
-            Toast.makeText(requireContext(), "Recipe inserted successfully!", Toast.LENGTH_LONG).show()
-            findNavController().navigateUp()
+            Log.d(TAG, "Item inserted with name: ${recipeEntity.name}")
+            context?.let { profileViewModel.insertRecipe(recipeEntity) }
+            context?.let {
+                profileViewModel.allRecipes()
+                Log.d(TAG, "My Recipe List: ${profileViewModel.liveData.value}}")
+                Toast.makeText(requireContext(), "Recipe inserted successfully!", Toast.LENGTH_LONG)
+                    .show()
+                findNavController().navigateUp()
+            }
         }
-        else{
-            Toast.makeText(requireContext(), "Fill all boxes", Toast.LENGTH_LONG).show()
+            else{
+                Toast.makeText(requireContext(), "Fill all boxes", Toast.LENGTH_LONG).show()
 
+            }
         }
+
     }
-
-}

@@ -1,5 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,10 +9,21 @@ import com.tasty.recipesapp.R
 import com.tasty.recipesapp.repository.recipe.RecipeEntity
 import android.view.View
 import android.widget.TextView
+import com.tasty.recipesapp.ui.profile.ProfileFragment
+import com.tasty.recipesapp.ui.recipe.RecipesFragment
 
 
-class MyRecipeListAdapter(private val recipes: List<RecipeEntity>) :
-    RecyclerView.Adapter<MyRecipeListAdapter.MyRecipeViewHolder>() {
+class MyRecipeListAdapter(private var recipes: List<RecipeEntity>,
+                          private val profileFragment: ProfileFragment,
+                          private val context: Context
+) : RecyclerView.Adapter<MyRecipeListAdapter.MyRecipeViewHolder>() {
+
+    fun updateRecipes(newRecipes: List<RecipeEntity>) {
+        recipes = newRecipes
+        notifyDataSetChanged()
+    }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyRecipeViewHolder {
         val view = LayoutInflater.from(parent.context)

@@ -56,7 +56,7 @@ class RecipeDetailFragment : Fragment() {
                     .placeholder(R.drawable.rh_logo)
                     .into(binding.recipeImageView)
 
-                val instructionsAdapter = InstructionsAdapter(recipe.instructions)
+                val instructionsAdapter = recipe.instructions?.let { InstructionsAdapter(it) }
 
                 binding.instructionsRecyclerView.adapter = instructionsAdapter
                 binding.instructionsRecyclerView.layoutManager = LinearLayoutManager(context)

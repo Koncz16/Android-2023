@@ -50,13 +50,24 @@ class RecipeRepository(private val context: Context) {
         }
 
         fun insertRecipe(recipeEntity: RecipeEntity): Boolean {
-            return myRecipeList.add(recipeEntity)
+            Log.d(TAG,"insertRecipe - called()")
+            Log.d(TAG,"Recipe Entity: name: ${recipeEntity.name} desc: ${recipeEntity.description}")
+            val res=myRecipeList.add(recipeEntity)
+            Log.d(TAG,"$res")
+            Log.d(TAG,"My Recipe List size: ${myRecipeList.size}")
+
+            return  res
         }
 
         fun deleteRecipe(recipeEntity: RecipeEntity): Boolean {
             return myRecipeList.remove(recipeEntity)
         }
 
-        fun getMyRecipes() = myRecipeList
+        fun getMyRecipes():ArrayList<RecipeEntity> {
+            Log.d(TAG,"getMyRecipes - called()")
+            Log.d(TAG,"My Recipe List size: ${myRecipeList.size}")
+
+            return myRecipeList
+        }
 
 }

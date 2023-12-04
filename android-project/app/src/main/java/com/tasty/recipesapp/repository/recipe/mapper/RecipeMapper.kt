@@ -25,7 +25,8 @@ class RecipeMapper {
                 thumbnail_url=this.thumbnail_url,
                 ratings=this.user_ratings.toModel(),
                 video_url=this.video_url,
-                total_time_tier=this.total_time_tier.toModel()
+                total_time_tier=this.total_time_tier.toModel(),
+                original_video_url= this.original_video_url
             )
         }
         fun List<RecipeDTO>.toModelList(): List<RecipeModel> = this.map { it.toModel() }
