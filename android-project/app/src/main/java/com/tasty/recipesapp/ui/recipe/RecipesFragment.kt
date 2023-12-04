@@ -19,7 +19,7 @@ import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
 import com.tasty.recipesapp.ui.home.DashboardFragment
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
-import com.tasty.recipesapp.viewModel.recipe.RecipeListViewModel
+import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 
 class RecipesFragment : Fragment() {
     companion object {
@@ -37,7 +37,7 @@ class RecipesFragment : Fragment() {
         val view = binding.root
 
         val viewModel: RecipeListViewModel by viewModels()
-        context?.let { viewModel.readAllRecipes(it) }
+        context?.let { viewModel.loadInstructionData(it) }
 
         val adapter = viewModel.liveData.value?.let { recipes ->
             context?.let { context ->
