@@ -18,7 +18,7 @@ class RecipeRepository(private val context: Context) {
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private val JSON_FILE_NAME = "all_recipes.json"
     private var recipeList:List<RecipeModel> = emptyList()
-    private var myRecipeList:ArrayList<RecipeModel> = ArrayList()
+    private var myRecipeList:ArrayList<RecipeEntity> = ArrayList()
 
 
     // Function to read JSON data from a file in the assets directory
@@ -49,14 +49,14 @@ class RecipeRepository(private val context: Context) {
             return recipeList.find { it.id == recipeID }
         }
 
-        fun insertRecipe(recipeModel: RecipeModel): Boolean {
-            return myRecipeList.add(recipeModel)
+        fun insertRecipe(recipeEntity: RecipeEntity): Boolean {
+            return myRecipeList.add(recipeEntity)
         }
 
-        fun deleteRecipe(recipeModel: RecipeModel): Boolean {
-            return myRecipeList.remove(recipeModel)
+        fun deleteRecipe(recipeEntity: RecipeEntity): Boolean {
+            return myRecipeList.remove(recipeEntity)
         }
 
-        fun getMyRecipes(context: Context) = myRecipeList
+        fun getMyRecipes() = myRecipeList
 
 }
