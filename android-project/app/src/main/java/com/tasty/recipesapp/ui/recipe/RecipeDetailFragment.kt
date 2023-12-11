@@ -36,35 +36,68 @@ class RecipeDetailFragment : Fragment() {
     ): View? {
         _binding = FragmentRecipeDetailBinding.inflate(inflater, container, false)
         val view = binding.root
-
+        Log.d(TAG, "Args: $arguments")
         val recipeId = arguments?.getInt("recipeID") ?: -1
+        val source = arguments?.getString("sourcePage")
         Log.d(TAG, "Recipe id : ${recipeId}")
-        val recipe=viewModel.fetchRecipeDetail(recipeId, requireContext())
+        Log.d(TAG, "Recipe source : ${source}")
+        if (source == "ProfileFragment") {
+            viewModel.getRecipeDetail(recipeId)
+            viewModel.recipe.observe(viewLifecycleOwner, Observer { recipe ->
+                if (recipe != null) {
+                    binding.recipeTitle.text = recipe.name
+                    val ratingLabel = "Rating:"
+                    binding.recipeRatings.text = "$ratingLabel ${recipe.ratings?.score}"
+                    val priceLabel = "Price:"
+                    binding.recipePrice.text = "$priceLabel ${recipe.price?.total} HUF"
+                    val timeLabel = "Preparation time:"
+                    binding.recipeTotalTimeTier.text = "$timeLabel ${recipe.total_time_tier?.displayTier}"
 
-        viewModel.recipe.observe(viewLifecycleOwner, Observer { recipe ->
+                    Glide.with(requireContext())
+                        .load(recipe.thumbnail_url)
+                        .placeholder(R.drawable.rh_logo)
+                        .into(binding.recipeImageView)
+
+                    val instructionsAdapter = recipe.instructions?.let { InstructionsAdapter(it) }
+
+                    binding.instructionsRecyclerView.adapter = instructionsAdapter
+                    binding.instructionsRecyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.instructionsRecyclerView.addItemDecoration(
+                        DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+                    )
+                }
+            })
+        } else {
+            val recipe = viewModel.fetchRecipeDetail(recipeId, requireContext())
             if (recipe != null) {
                 binding.recipeTitle.text = recipe.name
-                val ratingLabel = "Rating:"
+            }
+            val ratingLabel = "Rating:"
+            if (recipe != null) {
                 binding.recipeRatings.text = "$ratingLabel ${recipe.ratings?.score}"
                 val priceLabel = "Price:"
-                binding.recipePrice.text = "$priceLabel ${recipe.price.total} HUF"
+                binding.recipePrice.text = "$priceLabel ${recipe.price?.total} HUF"
                 val timeLabel = "Preparation time:"
-                binding.recipeTotalTimeTier.text = "$timeLabel ${recipe.total_time_tier.displayTier}"
+                binding.recipeTotalTimeTier.text = "$timeLabel ${recipe.total_time_tier?.displayTier}"
 
+            }
+
+
+            if (recipe != null) {
                 Glide.with(requireContext())
                     .load(recipe.thumbnail_url)
                     .placeholder(R.drawable.rh_logo)
                     .into(binding.recipeImageView)
-
-                val instructionsAdapter = recipe.instructions?.let { InstructionsAdapter(it) }
-
-                binding.instructionsRecyclerView.adapter = instructionsAdapter
-                binding.instructionsRecyclerView.layoutManager = LinearLayoutManager(context)
-                binding.instructionsRecyclerView.addItemDecoration(
-                    DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-                )
             }
-        })
+
+            val instructionsAdapter = recipe?.instructions?.let { InstructionsAdapter(it) }
+
+            binding.instructionsRecyclerView.adapter = instructionsAdapter
+            binding.instructionsRecyclerView.layoutManager = LinearLayoutManager(context)
+            binding.instructionsRecyclerView.addItemDecoration(
+                DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            )
+        }
 
         // Inflate the layout for this fragment
         return view

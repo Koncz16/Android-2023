@@ -1,5 +1,6 @@
 package com.tasty.recipesapp.repository.recipe
 
+import android.content.Context
 import android.util.Log
 import com.tasty.recipesapp.repository.recipe.dtos.RecipeDTO
 import java.io.BufferedReader
@@ -8,22 +9,24 @@ import java.io.InputStreamReader
 import com.google.gson.Gson
 import com.tasty.recipesapp.repository.recipe.dtos.RecipeResultDTO
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
-import com.tasty.recipesapp.ui.recipe.RecipesFragment
 import java.io.Reader
-import android.content.Context
+import com.tasty.recipesapp.database.RecipeDatabase
+import com.tasty.recipesapp.repository.recipe.dao.RecipeDao
+import com.tasty.recipesapp.repository.recipe.mapper.RecipeMapper.Companion.toModel
 import com.tasty.recipesapp.repository.recipe.mapper.RecipeMapper.Companion.toModelList
+import org.json.JSONObject
 
 
-class RecipeRepository(private val context: Context) {
+class RecipeRepository(private val recipeDao: RecipeDao) {
     private val TAG: String? = RecipeRepository::class.java.canonicalName
     private val JSON_FILE_NAME = "all_recipes.json"
-    private var recipeList:List<RecipeModel> = emptyList()
-    private var myRecipeList:ArrayList<RecipeEntity> = ArrayList()
+    private var recipeList: List<RecipeModel> = emptyList()
+    private var myRecipeList: ArrayList<Recipe> = ArrayList()
 
 
     // Function to read JSON data from a file in the assets directory
     // In the future this should be deleted and data should be fetched from a public API
-     fun readRecipes(): List<RecipeDTO> {
+    fun readRecipes(context: Context): List<RecipeModel> {
         try {
             // Open the file as an input stream
             val inputStream = context.assets.open(JSON_FILE_NAME)
@@ -35,39 +38,48 @@ class RecipeRepository(private val context: Context) {
             val result = Gson().fromJson(reader, RecipeResultDTO::class.java)
 
             // Return the list of RecipeDTO objects
-            recipeList=result.results.toModelList()
+            recipeList = result.results.toModelList()
 
-            return result.results
+            return recipeList
         } catch (e: IOException) {
             Log.e(TAG, "Error reading recipes from JSON file", e)
             return emptyList()
         }
     }
-        fun getRecipe(recipeID: Int): RecipeModel? {
-            recipeList=readRecipes().toModelList()
-            Log.d(TAG,"RecipeList size: ${recipeList.size}")
-            return recipeList.find { it.id == recipeID }
-        }
+    suspend fun deleteRecipeById(recipeID: Int){
+        recipeDao.deleteRecipeById(recipeID)
+    }
+    suspend fun getRecipeById(recipeID: Int): RecipeModel?{
+        val recipe = recipeDao.getRecipeById(recipeID)
+        val jsonObject = JSONObject(recipe!!.json)
+        val gson = Gson()
+        jsonObject.apply{put("id", recipe.internalId)}
+        val result=gson.fromJson(jsonObject.toString(), RecipeDTO::class.java)
 
-        fun insertRecipe(recipeEntity: RecipeEntity): Boolean {
-            Log.d(TAG,"insertRecipe - called()")
-            Log.d(TAG,"Recipe Entity: name: ${recipeEntity.name} desc: ${recipeEntity.description}")
-            val res=myRecipeList.add(recipeEntity)
-            Log.d(TAG,"$res")
-            Log.d(TAG,"My Recipe List size: ${myRecipeList.size}")
+        Log.d(TAG,"Result: ${result}")
+        return result.toModel()
+    }
 
-            return  res
-        }
 
-        fun deleteRecipe(recipeEntity: RecipeEntity): Boolean {
-            return myRecipeList.remove(recipeEntity)
-        }
+    suspend fun insertRecipe(recipe: RecipeEntity) {
+        recipeDao.insertRecipe(recipe)
+    }
 
-        fun getMyRecipes():ArrayList<RecipeEntity> {
-            Log.d(TAG,"getMyRecipes - called()")
-            Log.d(TAG,"My Recipe List size: ${myRecipeList.size}")
+    fun getRecipe(context: Context, recipeID: Int): RecipeModel? {
+        recipeList = readRecipes(context)
+        return recipeList.find { it.id == recipeID }
+    }
 
-            return myRecipeList
-        }
+    suspend fun getAllRecipes(): List<RecipeModel> {
+        recipeList = recipeDao.getAllRecipes().map {
+            val jsonObject = JSONObject(it.json)
+            val gson = Gson()
+            jsonObject.apply { put("id", it.internalId) }
+            gson.fromJson(jsonObject.toString(), RecipeDTO::class.java)
+        }.toModelList()
+        return recipeList
+
+    }
+
 
 }

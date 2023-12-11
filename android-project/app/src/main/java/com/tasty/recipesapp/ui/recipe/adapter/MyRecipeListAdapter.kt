@@ -1,24 +1,22 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tasty.recipesapp.R
-import com.tasty.recipesapp.repository.recipe.RecipeEntity
+import com.tasty.recipesapp.repository.recipe.Recipe
 import android.view.View
 import android.widget.TextView
 import com.tasty.recipesapp.ui.profile.ProfileFragment
-import com.tasty.recipesapp.ui.recipe.RecipesFragment
 
 
-class MyRecipeListAdapter(private var recipes: List<RecipeEntity>,
+class MyRecipeListAdapter(private var recipes: List<Recipe>,
                           private val profileFragment: ProfileFragment,
                           private val context: Context
 ) : RecyclerView.Adapter<MyRecipeListAdapter.MyRecipeViewHolder>() {
 
-    fun updateRecipes(newRecipes: List<RecipeEntity>) {
+    fun updateRecipes(newRecipes: List<Recipe>) {
         recipes = newRecipes
         notifyDataSetChanged()
     }
@@ -43,7 +41,7 @@ class MyRecipeListAdapter(private var recipes: List<RecipeEntity>,
         private val recipeDescriptionTextView: TextView =
             itemView.findViewById(R.id.recipeDescriptionTextView)
 
-        fun bind(recipe: RecipeEntity) {
+        fun bind(recipe: Recipe) {
             recipeNameTextView.text = recipe.name
             recipeDescriptionTextView.text = recipe.description
         }

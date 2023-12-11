@@ -42,6 +42,18 @@
         <action
             android:id="@+id/action_profileFragment_to_newRecipeFragment"
             app:destination="@id/newRecipeFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment">
+            <argument
+                android:name="recipeID"
+                app:argType="integer"
+                android:defaultValue="@null"/>
+            <argument
+                android:name="sourcePage"
+                app:argType="integer"
+                android:defaultValue="@null"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"

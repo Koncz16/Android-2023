@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasty.recipesapp.repository.recipe.RecipeRepository
+import com.tasty.recipesapp.repository.recipe.RepositoryProvider.recipeRepository
 import com.tasty.recipesapp.repository.recipe.mapper.RecipeMapper.Companion.toModelList
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
-import com.tasty.recipesapp.ui.recipe.RecipesFragment
 import kotlinx.coroutines.launch
 
 class RecipeListViewModel: ViewModel() {
@@ -15,9 +15,9 @@ class RecipeListViewModel: ViewModel() {
 
     fun loadInstructionData(context: Context){
         viewModelScope.launch {
-            val list = RecipeRepository(context).readRecipes()
-            val models = list.toModelList()
-            liveData.value = models.toTypedArray()
+            val list = recipeRepository.readRecipes(context)
+
+            liveData.value = list.toTypedArray()
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.tasty.recipesapp.ui.recipe
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,19 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentRecipesBinding
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
-import com.tasty.recipesapp.ui.home.DashboardFragment
 import com.tasty.recipesapp.ui.recipe.adapter.RecipeListAdapter
 import com.tasty.recipesapp.ui.recipe.viewmodel.RecipeListViewModel
 
-class RecipesFragment : Fragment() {
+class RecipesFragment : Fragment(), RecipeListAdapter.OnRecipeClickListener {
+    interface OnRecipeClickListener {
+        fun onRecipeClick(recipe:RecipeModel)
+    }
     companion object {
         val TAG: String? = RecipesFragment::class.java.canonicalName
     }
@@ -41,7 +40,7 @@ class RecipesFragment : Fragment() {
 
         val adapter = viewModel.liveData.value?.let { recipes ->
             context?.let { context ->
-                RecipeListAdapter(recipes, this, context)
+                RecipeListAdapter(recipes, this)
             }
         }
 
@@ -69,5 +68,17 @@ class RecipesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onRecipeClick(recipe:RecipeModel) {
+        val recipeId=recipe.id
+        Log.d(TAG,"onRecipeClick - Called()")
+        val bundle = Bundle()
+        bundle.putInt("recipeID", recipe.id)
+
+        findNavController().navigate(
+            R.id.action_recipesFragment_to_recipeDetailFragment,
+            bundle
+        )
     }
 }

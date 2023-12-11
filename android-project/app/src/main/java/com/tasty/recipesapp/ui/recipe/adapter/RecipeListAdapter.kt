@@ -1,23 +1,24 @@
 package com.tasty.recipesapp.ui.recipe.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
+import com.tasty.recipesapp.ui.profile.ProfileFragment
 import com.tasty.recipesapp.ui.recipe.RecipesFragment
 
-class RecipeListAdapter(private val recipes:Array<RecipeModel>,
-                        private val recipesFragment: RecipesFragment,
-                        private val context:Context) :
-    RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
+class RecipeListAdapter(
+    var recipes: Array<RecipeModel>, private var onRecipeClickListener: OnRecipeClickListener
+): RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
+    interface OnRecipeClickListener {
+        fun onRecipeClick(recipe:RecipeModel)
+    }
     companion object {
         val TAG: String? = RecipeListAdapter::class.java.canonicalName
     }
@@ -31,9 +32,10 @@ class RecipeListAdapter(private val recipes:Array<RecipeModel>,
            itemView.setOnClickListener{it :View ->
                val position:Int = this.adapterPosition
                val currentRecipe=recipes[position]
-                    Log.d(TAG,"ItemView Clicked on id: ${currentRecipe.name}. ${currentRecipe.id}")
-               recipesFragment.navigateToRecipeDetail(currentRecipe)
-               //onItemCickListener(currentRecipe)
+                    Log.d(TAG,"ItemView Clicked on id: ${currentRecipe.id}")
+               val recipesFragment= RecipesFragment()
+               //recipesFragment.navigateToRecipeDetail(currentRecipe)
+               onRecipeClickListener.onRecipeClick(currentRecipe)
            }
        }
 

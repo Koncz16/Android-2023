@@ -11,13 +11,14 @@ class RecipeModel (
     val id: Int,
     val name: String,
     val description: String,
-    val instructions: List<InstructionModel>,
-    val tags:List<TagModel>,
-    val price: PriceModel,
-    val thumbnail_url : String,
+    val instructions: List<InstructionModel>?,
+    val tags:List<TagModel>?,
+    val price: PriceModel?,
+    val thumbnail_url : String?,
+    val ingredients: List<String>?,
     val ratings : UserRatingsModel?,
     val video_url : String?,
-    val total_time_tier: TotalTimeTierModel,
+    val total_time_tier: TotalTimeTierModel?,
     val original_video_url : String?
 
 
