@@ -3,6 +3,7 @@ package com.tasty.recipesapp.ui.recipe.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,8 +15,8 @@ import com.tasty.recipesapp.ui.profile.ProfileFragment
 import com.tasty.recipesapp.ui.recipe.RecipesFragment
 
 class RecipeListAdapter(
-    var recipes: Array<RecipeModel>, private var onRecipeClickListener: OnRecipeClickListener
-): RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
+    var recipes: Array<RecipeModel>, private var onRecipeClickListener: OnRecipeClickListener):
+    RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
     interface OnRecipeClickListener {
         fun onRecipeClick(recipe:RecipeModel)
     }
@@ -37,6 +38,7 @@ class RecipeListAdapter(
                //recipesFragment.navigateToRecipeDetail(currentRecipe)
                onRecipeClickListener.onRecipeClick(currentRecipe)
            }
+
        }
 
    }

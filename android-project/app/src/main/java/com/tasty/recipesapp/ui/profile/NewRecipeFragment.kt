@@ -57,7 +57,7 @@ class NewRecipeFragment : Fragment() {
             val instruction1 = binding.editTextInstruction1.text.toString()
             val instruction2 = binding.editTextInstruction2.text.toString()
 
-            if(name.isNotEmpty() || description.isNotEmpty() || thumbnail_url.isNotEmpty() ||user_ratings.isNotEmpty() || instruction1.isNotEmpty() || instruction2.isNotEmpty()){
+            if (name.isNotEmpty() && description.isNotEmpty() && thumbnail_url.isNotEmpty() && user_ratings.isNotEmpty() && instruction1.isNotEmpty() && instruction2.isNotEmpty()) {
                 val jsonData = """
             {
                 "name": "$name",
