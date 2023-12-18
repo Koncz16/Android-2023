@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -32,11 +36,13 @@ class RecipesFragment : Fragment(), RecipeListAdapter.OnRecipeClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         val view = binding.root
 
         val viewModel: RecipeListViewModel by viewModels()
-        context?.let { viewModel.loadInstructionData(it) }
+        // context?.let { viewModel.loadInstructionData(it) }
+        context?.let { viewModel.getAllRecipesFromApi() }
 
         val adapter = viewModel.liveData.value?.let { recipes ->
             context?.let { context ->
@@ -51,6 +57,7 @@ class RecipesFragment : Fragment(), RecipeListAdapter.OnRecipeClickListener {
         )
 
         // Inflate the layout for this fragment
+
         return view
     }
 

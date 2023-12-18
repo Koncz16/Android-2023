@@ -21,7 +21,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     private val repository: RecipeRepository = RepositoryProvider.recipeRepository
-    val liveData = MutableLiveData<Array<RecipeModel>>()
+    val liveData = MutableLiveData<List<RecipeModel>>()
     // LiveData to hold the list of recipes
     fun deleteRecipeById(recipeID: Int){
         viewModelScope.launch {
@@ -43,7 +43,7 @@ class ProfileViewModel : ViewModel() {
         viewModelScope.launch {
             val list = repository.getAllRecipes()
 
-            liveData.value = list.toTypedArray()
+            liveData.value = list
         }
     }
 

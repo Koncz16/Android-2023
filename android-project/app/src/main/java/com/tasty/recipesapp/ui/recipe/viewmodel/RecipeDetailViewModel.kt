@@ -36,8 +36,13 @@ class RecipeDetailViewModel :ViewModel(){
             recipe.value = result
 
         }
-
     }
-
+    fun getRecipeDetailFromApi(recipeId: Int) {
+        viewModelScope.launch {
+            val result = recipeRepository.getRecipeByIdFromApi(recipeId.toString())
+            Log.d(TAG, "Result name: ${result?.name}")
+            recipe.value = result
+        }
+    }
 
 }

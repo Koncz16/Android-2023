@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,7 +48,7 @@ class ProfileFragment : Fragment(), RecipeListAdapter.OnRecipeClickListener{
         val viewModel: ProfileViewModel by viewModels()
 
 
-        val recipes: Array<RecipeModel> = emptyArray()
+        val recipes: List<RecipeModel> = emptyList()
         val myAdapter = RecipeListAdapter(recipes, this)
 
         binding.myRecyclerView.layoutManager = LinearLayoutManager(context)

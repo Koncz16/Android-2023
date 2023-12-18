@@ -7,6 +7,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import com.google.gson.Gson
+import com.tasty.recipesapp.api.RecipeApiClient
 import com.tasty.recipesapp.repository.recipe.dtos.RecipeResultDTO
 import com.tasty.recipesapp.repository.recipe.models.RecipeModel
 import java.io.Reader
@@ -46,7 +47,24 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
             return emptyList()
         }
     }
-    suspend fun deleteRecipeById(recipeID: Int){
+
+    private val recipeApiClient = RecipeApiClient()
+    suspend fun getRecipesFromApi(
+        from: String,
+        size: String,
+        tags: String? = null,
+    ): List<RecipeModel> {
+        return recipeApiClient.recipeService.getRecipes(from,size,tags).results.toModelList()
+//call the suitable method from the api client and
+//return a list of recipeModels
+    }
+    suspend fun getRecipeByIdFromApi(
+        id: String):RecipeModel?{
+        return  recipeApiClient.recipeService.getRecipeDetail(id).toModel()
+    }
+
+
+        suspend fun deleteRecipeById(recipeID: Int){
         recipeDao.deleteRecipeById(recipeID)
     }
     suspend fun getRecipeById(recipeID: Int): RecipeModel?{
