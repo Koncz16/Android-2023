@@ -43,8 +43,8 @@ class RegisterFragment : Fragment() {
             val password = binding.passwordEditText.text.toString()
 
             if (name.isNotEmpty() && password.isNotEmpty()) {
-
-                val newuser = UserEntity(name=name, password = password)
+                val psw = viewModel.hashPassword(password)
+                val newuser = UserEntity(name=name, password = psw)
                 // Insert the new recipe using the ProfileViewModel
                 viewModel.insertUser(newuser)
                 Toast.makeText(requireContext(), "User inserted successfully!", Toast.LENGTH_LONG)
