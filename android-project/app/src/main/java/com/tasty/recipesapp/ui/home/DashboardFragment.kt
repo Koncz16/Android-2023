@@ -6,8 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.tasty.recipesapp.R
 import com.tasty.recipesapp.databinding.FragmentDashboardBinding
+import com.tasty.recipesapp.ui.profile.ProfileFragment
+
 class DashboardFragment : Fragment() {
     companion object{
         val TAG:String? = DashboardFragment::class.java.canonicalName
@@ -21,7 +26,12 @@ class DashboardFragment : Fragment() {
         binding = FragmentDashboardBinding.inflate(layoutInflater)
         Log.d(TAG,"DashboardFragment - onCreateView() called")
 
+        val registerButton: Button = binding.buttonRegister
+
+        registerButton.setOnClickListener {
+            Log.d(TAG, "buttonRegister - Clicked")
+            findNavController().navigate(R.id.action_dashboardFragment_to_registerFragment)
+        }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
-    }
+        return binding.root    }
 }

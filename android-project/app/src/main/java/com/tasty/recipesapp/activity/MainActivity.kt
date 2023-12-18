@@ -12,6 +12,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.tasty.recipesapp.databinding.ActivityMainBinding
 import com.tasty.recipesapp.repository.recipe.RepositoryProvider
+import com.tasty.recipesapp.repository.recipe.UserRepository
+import com.tasty.recipesapp.repository.recipe.UserRepositoryProvider
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         RepositoryProvider.initialize(applicationContext)
-
+        UserRepositoryProvider.initialize(applicationContext)
         setupNavigation()
 
     }
