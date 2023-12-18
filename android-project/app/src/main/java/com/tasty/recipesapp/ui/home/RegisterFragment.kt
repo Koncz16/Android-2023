@@ -1,4 +1,4 @@
-// Import necessary libraries
+package com.tasty.recipesapp.ui.home// Import necessary libraries
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tasty.recipesapp.R  // Replace with your actual R class import
-import com.tasty.recipesapp.databinding.FragmentNewRecipeBinding
 import com.tasty.recipesapp.databinding.FragmentRegisterBinding
-import com.tasty.recipesapp.repository.recipe.RecipeEntity
 import com.tasty.recipesapp.repository.recipe.UserEntity
-import com.tasty.recipesapp.ui.recipe.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.ui.recipe.viewmodel.UserViewModel
 
 class RegisterFragment : Fragment() {

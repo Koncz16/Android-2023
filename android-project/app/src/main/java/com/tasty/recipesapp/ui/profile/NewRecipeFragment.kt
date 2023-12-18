@@ -17,6 +17,7 @@ import com.tasty.recipesapp.databinding.FragmentNewRecipeBinding
 import com.tasty.recipesapp.repository.recipe.Recipe
 import com.tasty.recipesapp.ui.recipe.viewmodel.ProfileViewModel
 import com.tasty.recipesapp.repository.recipe.RecipeEntity
+import com.tasty.recipesapp.ui.home.AppPreferences
 
 
 class NewRecipeFragment : Fragment() {
@@ -74,11 +75,22 @@ class NewRecipeFragment : Fragment() {
                 }
             }
         """.trimIndent()
-                val newRecipe = RecipeEntity(
-                    json = jsonData
-                )
+                val context = requireContext()
+
+                val appPreferences = AppPreferences(context)
+
+                val userId = appPreferences.userId
+                Log.d(TAG, "User id: $userId")
+                val newRecipe = userId?.let { it1 ->
+                    RecipeEntity(
+                        json = jsonData,
+                        userId = it1
+                    )
+                }
                 // Insert the new recipe using the ProfileViewModel
-                viewModel.insertRecipe(newRecipe)
+                if (newRecipe != null) {
+                    viewModel.insertRecipe(newRecipe)
+                }
                 Toast.makeText(requireContext(), "Recipe inserted successfully!", Toast.LENGTH_LONG)
                     .show()
                 // Navigate back to the previous screen or wherever you want to go

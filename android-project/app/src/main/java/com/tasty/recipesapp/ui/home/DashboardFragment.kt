@@ -32,6 +32,13 @@ class DashboardFragment : Fragment() {
             Log.d(TAG, "buttonRegister - Clicked")
             findNavController().navigate(R.id.action_dashboardFragment_to_registerFragment)
         }
+
+        val loginButton :Button = binding.buttonLogin
+
+        loginButton.setOnClickListener {
+            Log.d(TAG,"buttonLogin - Clicked")
+            findNavController().navigate(R.id.action_dashboardFragment_to_logInFragment)
+        }
         // Inflate the layout for this fragment
         return binding.root    }
 }

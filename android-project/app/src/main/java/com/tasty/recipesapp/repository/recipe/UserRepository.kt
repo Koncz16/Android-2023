@@ -29,4 +29,9 @@ class UserRepository(private val userDao: UserDao) {
         }
         return userList
     }
+
+    suspend fun logInUser(name:String, password:String):Long{
+        val userId= userDao.logInUser(name, password)
+        return userId
+    }
 }

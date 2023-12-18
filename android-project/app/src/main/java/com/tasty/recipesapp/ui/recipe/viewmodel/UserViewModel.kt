@@ -1,5 +1,7 @@
 package com.tasty.recipesapp.ui.recipe.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasty.recipesapp.repository.recipe.UserEntity
@@ -12,7 +14,8 @@ import java.security.NoSuchAlgorithmException
 
 class UserViewModel: ViewModel() {
     private val repository: UserRepository = UserRepositoryProvider.userRepository
-
+    private val _userId = MutableLiveData<Long?>()
+    val userId: LiveData<Long?> get() = _userId
     fun hashPassword(password: String): String {
             // Create MessageDigest instance for SHA-256
             val md = MessageDigest.getInstance("SHA-256")
@@ -41,4 +44,12 @@ class UserViewModel: ViewModel() {
             repository.insertUser(user)
         }
     }
+    fun getUserID(name: String, password: String) {
+        viewModelScope.launch {
+            val userId = repository.logInUser(name, password)
+            _userId.value = userId
+        }
+    }
+
+
 }
